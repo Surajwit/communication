@@ -1,0 +1,2 @@
+include *.md
+recursive-include communication *.json *.py *.js *.css *.html *.txt *.svg

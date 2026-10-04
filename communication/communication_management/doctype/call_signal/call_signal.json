@@ -1,0 +1,79 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "creation": "2026-10-04 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "call_session",
+    "signal_id",
+    "sender",
+    "kind",
+    "payload",
+    "creation_time"
+  ],
+  "fields": [
+    {
+      "fieldname": "call_session",
+      "fieldtype": "Link",
+      "label": "Call Session",
+      "options": "Call Session",
+      "reqd": 1
+    },
+    {
+      "fieldname": "signal_id",
+      "fieldtype": "Data",
+      "label": "Signal ID",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "sender",
+      "fieldtype": "Select",
+      "label": "Sender",
+      "options": "owner\nguest",
+      "reqd": 1
+    },
+    {
+      "fieldname": "kind",
+      "fieldtype": "Data",
+      "label": "Kind",
+      "reqd": 1
+    },
+    {
+      "fieldname": "payload",
+      "fieldtype": "Long Text",
+      "label": "Payload",
+      "reqd": 1
+    },
+    {
+      "fieldname": "creation_time",
+      "fieldtype": "Datetime",
+      "label": "Creation Time",
+      "read_only": 1
+    }
+  ],
+  "links": [],
+  "modified": "2026-10-04 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Communication Management",
+  "name": "Call Signal",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "read": 1,
+      "role": "System Manager",
+      "write": 1
+    },
+    {
+      "create": 1,
+      "read": 1,
+      "role": "All",
+      "write": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "ASC"
+}

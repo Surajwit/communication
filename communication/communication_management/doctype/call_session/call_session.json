@@ -1,0 +1,150 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "creation": "2026-10-04 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "communication_thread",
+    "contact",
+    "initiator_user",
+    "guest_name",
+    "join_token",
+    "guest_participant_token",
+    "status",
+    "started_at",
+    "ended_at",
+    "last_heartbeat",
+    "duration_seconds",
+    "recording_status",
+    "recording_file",
+    "recording_bytes",
+    "recording_mime_type",
+    "end_reason"
+  ],
+  "fields": [
+    {
+      "fieldname": "communication_thread",
+      "fieldtype": "Link",
+      "label": "Communication Thread",
+      "options": "Communication Thread",
+      "reqd": 1
+    },
+    {
+      "fieldname": "contact",
+      "fieldtype": "Link",
+      "label": "Contact",
+      "options": "Contact",
+      "reqd": 1
+    },
+    {
+      "fieldname": "initiator_user",
+      "fieldtype": "Link",
+      "label": "Initiator User",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "fieldname": "guest_name",
+      "fieldtype": "Data",
+      "label": "Guest Name"
+    },
+    {
+      "fieldname": "join_token",
+      "fieldtype": "Data",
+      "label": "Join Token",
+      "reqd": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "guest_participant_token",
+      "fieldtype": "Data",
+      "label": "Guest Participant Token",
+      "hidden": 1
+    },
+    {
+      "default": "Created",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Created\nActive\nCompleted\nInterrupted\nFailed",
+      "reqd": 1
+    },
+    {
+      "fieldname": "started_at",
+      "fieldtype": "Datetime",
+      "label": "Started At"
+    },
+    {
+      "fieldname": "ended_at",
+      "fieldtype": "Datetime",
+      "label": "Ended At"
+    },
+    {
+      "fieldname": "last_heartbeat",
+      "fieldtype": "Datetime",
+      "label": "Last Heartbeat"
+    },
+    {
+      "fieldname": "duration_seconds",
+      "fieldtype": "Int",
+      "label": "Duration Seconds"
+    },
+    {
+      "default": "Not Started",
+      "fieldname": "recording_status",
+      "fieldtype": "Select",
+      "label": "Recording Status",
+      "options": "Not Started\nRecording\nFinalizing\nCompleted\nPartial\nFailed"
+    },
+    {
+      "fieldname": "recording_file",
+      "fieldtype": "Link",
+      "label": "Recording File",
+      "options": "File"
+    },
+    {
+      "fieldname": "recording_bytes",
+      "fieldtype": "Int",
+      "label": "Recording Bytes"
+    },
+    {
+      "fieldname": "recording_mime_type",
+      "fieldtype": "Data",
+      "label": "Recording MIME Type"
+    },
+    {
+      "fieldname": "end_reason",
+      "fieldtype": "Data",
+      "label": "End Reason"
+    }
+  ],
+  "links": [],
+  "modified": "2026-10-04 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Communication Management",
+  "name": "Call Session",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "read": 1,
+      "role": "All",
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

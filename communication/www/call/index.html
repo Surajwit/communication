@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Communication Call</title>
+  <link rel="stylesheet" href="/assets/communication/css/call.css">
+</head>
+<body>
+  <main class="call-shell">
+    <section class="card">
+      <div class="brand">Communication</div>
+      <h1 id="title">Browser Call</h1>
+      <p id="subtitle">Connecting…</p>
+      <div class="status-row">
+        <span id="status" class="pill">Starting</span>
+        <span id="timer" class="timer">00:00</span>
+      </div>
+      <div id="recording" class="recording hidden">● Recording</div>
+      <div class="controls">
+        <button id="mute" disabled>Mute</button>
+        <button id="end" class="danger" disabled>End Call</button>
+      </div>
+      <div id="join-box" class="join-box hidden">
+        <label>Your name</label>
+        <input id="name" placeholder="Enter your name" maxlength="140">
+        <button id="join">Join Call</button>
+      </div>
+      <audio id="remote-audio" autoplay playsinline></audio>
+      <p id="error" class="error"></p>
+    </section>
+  </main>
+<script src="/assets/communication/js/call.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "creation": "2026-10-04 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "contact",
+    "status",
+    "last_communication_at",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "contact",
+      "fieldtype": "Link",
+      "label": "Contact",
+      "options": "Contact",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "default": "Open",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Open\nClosed",
+      "reqd": 1
+    },
+    {
+      "fieldname": "last_communication_at",
+      "fieldtype": "Datetime",
+      "label": "Last Communication At",
+      "read_only": 1
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-10-04 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Communication Management",
+  "name": "Communication Thread",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "read": 1,
+      "role": "All",
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

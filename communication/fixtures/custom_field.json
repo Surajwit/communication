@@ -1,0 +1,32 @@
+[
+  {
+    "doctype": "Custom Field",
+    "dt": "Contact",
+    "fieldname": "communication_thread",
+    "label": "Communication Thread",
+    "fieldtype": "Link",
+    "options": "Communication Thread",
+    "insert_after": "email_ids",
+    "read_only": 1,
+    "unique": 1
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Communication",
+    "fieldname": "communication_thread",
+    "label": "Communication Thread",
+    "fieldtype": "Link",
+    "options": "Communication Thread",
+    "insert_after": "reference_name",
+    "read_only": 1
+  },
+  {
+    "doctype": "Communication",
+    "fieldname": "call_session",
+    "label": "Call Session",
+    "fieldtype": "Link",
+    "options": "Call Session",
+    "insert_after": "communication_thread",
+    "read_only": 1
+  }
+]
