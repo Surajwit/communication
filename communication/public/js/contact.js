@@ -17,7 +17,6 @@ frappe.ui.form.on("Contact", {
             primary_action() { window.open(url, "_blank"); dialog.hide(); }
           });
           dialog.show();
-          dialog.fields_dict.url.$input.on("click", function() { this.select(); });
         }
       });
     }, __("Communication"));

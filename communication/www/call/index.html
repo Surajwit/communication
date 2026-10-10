@@ -6,7 +6,7 @@
   <title>Communication Call</title>
   <link rel="stylesheet" href="/assets/communication/css/call.css">
 </head>
-<body>
+<body data-csrf-token="{{ csrf_token }}">
   <main class="call-shell">
     <section class="card">
       <div class="brand">Communication</div>
@@ -30,6 +30,9 @@
       <p id="error" class="error"></p>
     </section>
   </main>
+<script>
+  window.csrf_token = document.body.dataset.csrfToken;
+</script>
 <script src="/assets/communication/js/call.js"></script>
 </body>
 </html>

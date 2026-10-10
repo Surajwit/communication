@@ -1,6 +1,7 @@
 [
   {
     "doctype": "Custom Field",
+    "name": "Contact-communication_thread",
     "dt": "Contact",
     "fieldname": "communication_thread",
     "label": "Communication Thread",
@@ -12,6 +13,7 @@
   },
   {
     "doctype": "Custom Field",
+    "name": "Communication-communication_thread",
     "dt": "Communication",
     "fieldname": "communication_thread",
     "label": "Communication Thread",
@@ -21,7 +23,9 @@
     "read_only": 1
   },
   {
-    "doctype": "Communication",
+    "doctype": "Custom Field",
+    "name": "Communication-call_session",
+    "dt": "Communication",
     "fieldname": "call_session",
     "label": "Call Session",
     "fieldtype": "Link",

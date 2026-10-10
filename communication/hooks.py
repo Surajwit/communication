@@ -8,6 +8,24 @@ app_version = "0.1.1"
 
 required_apps = ["frappe"]
 
+fixtures = [
+    {
+        "dt": "Custom Field",
+        "filters": [
+            [
+                "name",
+                "in",
+                [
+                    "Contact-communication_thread",
+                    "Communication-communication_thread",
+                    "Communication-call_session",
+                ],
+            ]
+        ],
+    }
+]
+
+
 add_to_apps_screen = [{
     "name": "communication",
     "title": "Communication",

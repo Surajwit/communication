@@ -100,7 +100,14 @@
   }
 
   async function startMedia() {
-    localStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: false });
+    if (!navigator.mediaDevices?.getUserMedia) {
+    throw new Error("Microphone access is unavailable. Open this page using HTTPS or localhost, and allow microphone access.");
+  }
+
+  localStream = await navigator.mediaDevices.getUserMedia({
+    audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
+    video: false
+  });
     remoteStream = new MediaStream();
     remoteAudio.srcObject = remoteStream;
     try { await remoteAudio.play(); } catch (_) {}
@@ -112,8 +119,6 @@
     mixedDestination = audioContext.createMediaStreamDestination();
     const localSource = audioContext.createMediaStreamSource(localStream);
     localSource.connect(mixedDestination);
-    const remoteSource = audioContext.createMediaStreamSource(remoteStream);
-    remoteSource.connect(mixedDestination);
     const candidates = ["audio/webm;codecs=opus", "audio/webm", "audio/ogg;codecs=opus", "audio/mp4"];
     const mime = candidates.find(x => MediaRecorder.isTypeSupported(x)) || "";
     recorder = new MediaRecorder(mixedDestination.stream, mime ? { mimeType: mime } : undefined);
@@ -195,14 +200,30 @@
     }
   }
 
-  async function startSignaling() {
-    pollTimer = setInterval(async () => {
-      try {
-        const signals = await api("poll_signals", { token: masterToken, participant_token: participantToken, after: lastSignal });
-        for (const signal of signals) { lastSignal = signal.id; await processSignal(signal); }
-      } catch (e) { console.error("Signaling poll", e); }
-    }, 700);
-  }
+function startSignaling() {
+  const poll = async () => {
+    if (ending) return;
+
+    try {
+      const signals = await api("poll_signals", {
+        token: masterToken,
+        participant_token: participantToken,
+        after: lastSignal
+      });
+
+      for (const signal of signals) {
+        lastSignal = signal.id;
+        await processSignal(signal);
+      }
+    } catch (e) {
+      console.error("Signaling poll", e);
+    }
+
+    if (!ending) pollTimer = setTimeout(poll, 700);
+  };
+
+  poll();
+}
 
   async function startHeartbeat() {
     heartbeatTimer = setInterval(async () => {
@@ -214,7 +235,7 @@
     if (ending) return;
     ending = true;
     setStatus(reason === "normal" ? "Ending" : "Interrupted");
-    clearInterval(pollTimer); clearInterval(heartbeatTimer); clearInterval(timerInterval);
+    clearTimeout(pollTimer); clearInterval(heartbeatTimer); clearInterval(timerInterval);
     const duration = timerStarted ? Math.floor((Date.now() - timerStarted) / 1000) : 0;
     let finalData = null;
     if (recorder && recorder.state !== "inactive") {
@@ -245,9 +266,23 @@
   endBtn.onclick = () => finish("normal");
   joinBtn.onclick = () => joinCall().catch(e => showError(e.message));
 
-  window.addEventListener("beforeunload", () => {
-    try { navigator.sendBeacon?.(`/api/method/communication.api.call.heartbeat?token=${encodeURIComponent(masterToken)}&participant_token=${encodeURIComponent(participantToken || "")}`); } catch (_) {}
+window.addEventListener("beforeunload", () => {
+  if (!masterToken || !participantToken) return;
+
+  fetch("/api/method/communication.api.call.heartbeat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "X-Frappe-CSRF-Token": window.csrf_token || ""
+    },
+    body: new URLSearchParams({
+      token: masterToken,
+      participant_token: participantToken
+    }),
+    credentials: "same-origin",
+    keepalive: true
   });
+});
 
   loadCall().catch(e => { setStatus("Unavailable"); showError(e.message); subtitleEl.textContent = "This call link is invalid or has expired."; });
 })();

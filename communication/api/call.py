@@ -314,7 +314,7 @@ def _create_communication(doc):
     }
     optional = {
         "communication_type": "Communication",
-        "communication_medium": "Call",
+        "communication_medium": "Phone",
         "reference_doctype": "Contact",
         "reference_name": doc.contact,
         "communication_thread": doc.communication_thread,
